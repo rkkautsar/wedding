@@ -12,6 +12,10 @@ function MyApp({ Component, pageProps }) {
           name="description"
           content="Faridah &amp; Rakha is getting married soon!"
         />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
       </Head>
       <Component {...pageProps} />
     </>
