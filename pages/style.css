@@ -5,6 +5,10 @@
 @layer base {
   @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
+  body {
+    @apply min-h-screen;
+  }
+
   h1,
   h2,
   h3 {
@@ -21,10 +25,17 @@
 }
 
 @layer components {
+  .full-screen-container {
+    @apply min-h-screen grid place-items-center place-content-center;
+  }
+  .map-bg-container {
+    @apply absolute w-full pointer-events-none opacity-30 z-0;
+    height: 100vh;
+  }
+  .content-container {
+    @apply h-full z-10 grid place-items-center text-center px-4;
+  }
 }
 
 @layer utilities {
-  .h-screen {
-    height: 100vh;
-  }
 }
