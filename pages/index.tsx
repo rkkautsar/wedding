@@ -23,7 +23,7 @@ export default function Home() {
   );
 }
 
-function Content(props: { lat: number; lng: number; zoom: number }) {
+function Content(props: { lat: number; lng: number }) {
   return (
     <div className="content-container">
       <div className="blob z-0 opacity-20" />
