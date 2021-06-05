@@ -15,7 +15,7 @@ export default function Home() {
         ></GoogleMapReact>
       </div>
       <div className="content-container">
-        <h1 className="text-gray-900">Getting married soon.</h1>
+        <h1 className="text-gray-900">We're getting married soon!</h1>
         <h2 className="text-gray-600">
           <time dateTime="2021-09-18">18.09.21</time>
         </h2>
