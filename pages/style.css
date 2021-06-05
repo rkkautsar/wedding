@@ -26,18 +26,22 @@
 
 @layer components {
   .full-screen-container {
-    @apply min-h-screen grid place-items-center place-content-center;
+    @apply min-h-screen;
   }
   .map-bg-container {
-    @apply absolute w-full pointer-events-none z-0 bg-black;
+    @apply absolute w-full z-0 bg-black;
     height: 100vh;
   }
   .overlay {
-    @apply absolute w-full bg-black opacity-30;
+    @apply absolute w-full bg-black opacity-30 pointer-events-none;
     height: 100vh;
   }
   .content-container {
-    @apply h-full z-10 grid place-items-center text-center px-6;
+    @apply w-64 max-w-sm pointer-events-none relative;
+  }
+
+  .blob {
+    @apply w-48 h-48 bg-pink-400 rounded-full absolute transform top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
   }
 }
 
