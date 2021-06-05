@@ -37,7 +37,7 @@
     height: 100vh;
   }
   .content-container {
-    @apply w-64 max-w-sm pointer-events-none relative;
+    @apply w-64 max-w-sm pointer-events-none transform -translate-x-1/2	 -translate-y-1/2 relative;
   }
 
   .blob {
