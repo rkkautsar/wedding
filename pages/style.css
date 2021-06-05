@@ -29,7 +29,11 @@
     @apply min-h-screen grid place-items-center place-content-center;
   }
   .map-bg-container {
-    @apply absolute w-full pointer-events-none opacity-30 z-0;
+    @apply absolute w-full pointer-events-none z-0;
+    height: 100vh;
+  }
+  .overlay {
+    @apply absolute w-full bg-black opacity-20;
     height: 100vh;
   }
   .content-container {

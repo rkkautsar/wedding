@@ -10,13 +10,14 @@ export default function Home() {
             lat: -6.6264221,
             lng: 106.8612671,
           }}
-          zoom={12}
-          options={{ mapId: "28cabfb041e8e28d", disableDefaultUI: true }}
+          zoom={15}
+          options={{ mapId: "819c06442ec43f18", disableDefaultUI: true }}
         ></GoogleMapReact>
       </div>
-      <div className="content-container">
-        <h1 className="text-gray-900">We're getting married soon!</h1>
-        <h2 className="text-gray-600">
+      <div className="overlay" />
+      <div className="content-container grid gap-2">
+        <h1 className="text-gray-100">We're getting married soon!</h1>
+        <h2 className="text-gray-400">
           <time dateTime="2021-09-18">18.09.21</time>
         </h2>
       </div>
