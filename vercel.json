@@ -1,0 +1,12 @@
+{
+  "redirects": [
+    {
+      "source": "/live",
+      "destination": "https://www.youtube.com/watch?v=Sr65Acw99DI"
+    },
+    {
+      "source": "/view-source",
+      "destination": "https://github.com/rkkautsar/wedding"
+    }
+  ]
+}
