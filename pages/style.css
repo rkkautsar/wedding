@@ -8,6 +8,7 @@
   body {
     @apply min-h-screen bg-black;
     font-family: Unna, sans-serif;
+    user-select: none;
   }
 
   h1,
