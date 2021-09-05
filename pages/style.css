@@ -3,17 +3,17 @@
 @tailwind utilities;
 
 @layer base {
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Unna:ital,wght@0,400;0,700;1,400&display=swap");
 
   body {
-    @apply min-h-screen;
+    @apply min-h-screen bg-black;
+    font-family: Unna, sans-serif;
   }
 
   h1,
   h2,
   h3 {
     @apply font-bold;
-    font-family: "Poppins", sans-serif;
   }
 
   h1 {
@@ -42,6 +42,35 @@
 
   .blob {
     @apply w-48 h-48 bg-pink-400 rounded-full absolute transform top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+
+  .stories-container {
+    @apply w-full max-w-2xl h-screen place-items-center place-content-center grid;
+    margin: 0 auto;
+  }
+
+  .story {
+    @apply w-full h-full p-6;
+  }
+
+  .story-with-header {
+    @apply pt-20;
+  }
+
+  .btn {
+    @apply block w-full text-center p-4 font-bold rounded-md transition-all duration-200 ease-in-out;
+  }
+
+  .btn-secondary {
+    @apply text-gray-200;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-gray-200 bg-opacity-25;
+  }
+
+  .social .btn-secondary {
+    @apply p-1 px-2;
   }
 }
 
