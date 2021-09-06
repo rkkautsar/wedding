@@ -61,7 +61,7 @@ const App = () => {
 
   if (isMobile) {
     storyWidth = "100vw";
-    storyHeight = "100vh";
+    storyHeight = "calc(var(--vh) * 100)";
   } else {
     storyWidth = height / ASPECT_RATIO;
     storyHeight = height;
