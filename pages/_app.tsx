@@ -1,8 +1,20 @@
 import Head from "next/head";
+import { useEffect } from "react";
 import "tailwindcss/tailwind.css";
 import "./style.css";
 
+function setViewHeight() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+}
+
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    setViewHeight();
+    window.addEventListener("resize", setViewHeight);
+    return () => window.removeEventListener("resize", setViewHeight);
+  }, []);
+
   return (
     <>
       <Head>

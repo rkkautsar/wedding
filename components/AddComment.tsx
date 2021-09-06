@@ -7,7 +7,7 @@ export const AddComment = ({ onSubmit }) => {
   return (
     <div className="w-full max-w-xs">
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="pb-8 mb-4 border-black border-opacity-20 border-b"
         onSubmit={(e) => {
           e.preventDefault();
           onSubmit({ content: comment, author: username });
@@ -47,7 +47,7 @@ export const AddComment = ({ onSubmit }) => {
         </div>
         <div className="flex items-center justify-between">
           <button
-            className="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded border border-transparent focus:outline-none focus:shadow-outline disabled:bg-gray-500 disabled:text-gray-400"
+            className="bg-dusty-blue text-blue-ink hover:bg-blue-ink hover:text-white font-bold py-2 px-4 rounded border border-transparent focus:outline-none focus:shadow-outline disabled:bg-gray-500 disabled:text-gray-400"
             type="submit"
             disabled={comment.length === 0 || username.length === 0}
           >

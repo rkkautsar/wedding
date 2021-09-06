@@ -10,6 +10,12 @@ module.exports = {
         "blue-ink": "#202D58",
         "black-tr-20": "rgba(0,0,0,0.2)",
       },
+      height: {
+        screen: "calc(var(--vh) * 100)",
+      },
+      minHeight: {
+        screen: "calc(var(--vh) * 100)",
+      },
     },
   },
   variants: {

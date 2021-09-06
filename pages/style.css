@@ -9,7 +9,6 @@
     @apply min-h-screen bg-black;
     font-family: Unna, serif;
     user-select: none;
-    min-height: 100vh;
     /* mobile viewport bug fix */
     min-height: -webkit-fill-available;
   }
@@ -37,12 +36,10 @@
     @apply min-h-screen;
   }
   .map-bg-container {
-    @apply absolute w-full z-0 bg-black;
-    height: 100vh;
+    @apply absolute w-full z-0 bg-black h-screen;
   }
   .overlay {
-    @apply absolute w-full bg-black opacity-30 pointer-events-none;
-    height: 100vh;
+    @apply absolute w-full bg-black opacity-30 pointer-events-none h-screen;
   }
   .content-container {
     @apply w-80 max-w-sm pointer-events-none transform -translate-x-1/2	 -translate-y-1/2 relative;
