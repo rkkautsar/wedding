@@ -8,6 +8,7 @@ module.exports = {
         "dusty-blue": "#CCDBED",
         "dusty-blue-900": "#93A7BE",
         "blue-ink": "#202D58",
+        "black-tr-20": "rgba(0,0,0,0.2)",
       },
     },
   },

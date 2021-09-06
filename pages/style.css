@@ -7,7 +7,7 @@
 
   body {
     @apply min-h-screen bg-black;
-    font-family: Unna, sans-serif;
+    font-family: Unna, serif;
     user-select: none;
   }
 
@@ -38,7 +38,8 @@
     height: 100vh;
   }
   .content-container {
-    @apply w-64 max-w-sm pointer-events-none transform -translate-x-1/2	 -translate-y-1/2 relative;
+    @apply w-80 max-w-sm pointer-events-none transform -translate-x-1/2	 -translate-y-1/2 relative;
+    font-family: Unna, serif;
   }
 
   .blob {
