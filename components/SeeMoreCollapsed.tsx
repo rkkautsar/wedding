@@ -10,7 +10,7 @@ export const SeeMoreLink = (props: {
   label?: string;
 }) => (
   <div
-    style={styles.seeMore}
+    className="seeMore"
     onClick={(e) => {
       e.preventDefault();
       props.action("pause");
@@ -18,15 +18,15 @@ export const SeeMoreLink = (props: {
       win.focus();
     }}
   >
-    <span style={styles.seeMoreIcon}>⌃</span>
-    <span style={styles.seeMoreText}>
+    <span className="seeMoreIcon">⌃</span>
+    <span className="seeMoreText">
       {props.label ? props.label : "See more"}
     </span>
   </div>
 );
 
 export const SeeMoreReplayComment = (props: {
-  toggleMore: Function;
+  toggleMore: any;
   action: Function;
 }) => {
   const { setCurrentIndex } = useContext(StoryContext);
@@ -38,10 +38,7 @@ export const SeeMoreReplayComment = (props: {
   };
 
   return (
-    <div
-      style={styles.seeMoreReplayComment}
-      className=" bottom-0 w-full flex flex-row"
-    >
+    <div className="seeMoreReplayComment bottom-0 w-full flex flex-row">
       <div
         className="flex-1 filter drop-shadow-lg flex flex-col items-center content-center p-4 text-blue-ink"
         onClick={onReplay}
@@ -58,59 +55,4 @@ export const SeeMoreReplayComment = (props: {
       </div>
     </div>
   );
-};
-
-const styles = {
-  seeMore: {
-    height: "10vh",
-    background: "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2))",
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    bottom: 0,
-  },
-  seeMoreReplayComment: {
-    height: "10vh",
-    background: "linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2))",
-  },
-  seeMoreExpanded: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    boxSizing: "border-box",
-    zIndex: 99999,
-  },
-  seeMoreText: {
-    color: "white",
-    textAlign: "center",
-    letterSpacing: "0.1em",
-    marginBottom: "2.2vh",
-    textTransform: "capitalize",
-    opacity: "1",
-    fontSize: "0.8em",
-    transition: "opacity 300ms ease-in-out",
-  },
-  seeMoreIcon: {
-    color: "white",
-    textAlign: "center",
-    letterSpacing: "0.2em",
-    marginBottom: "0.4vh",
-    opacity: "1",
-    filter: "drop-shadow(0 0 5px black)",
-    textTransform: "capitalize",
-    transition: "opacity 300ms ease-in-out",
-  },
-  seeMoreClose: {
-    position: "absolute",
-    filter: "drop-shadow(0 3px 2px #ccc)",
-    right: "0.5rem",
-    top: "0.5rem",
-    fontSize: "1.5rem",
-    opacity: "0.7",
-    padding: "1rem",
-  },
 };
