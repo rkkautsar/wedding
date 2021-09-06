@@ -9,6 +9,13 @@
     @apply min-h-screen bg-black;
     font-family: Unna, serif;
     user-select: none;
+    min-height: 100vh;
+    /* mobile viewport bug fix */
+    min-height: -webkit-fill-available;
+  }
+
+  html {
+    height: -webkit-fill-available;
   }
 
   h1,
