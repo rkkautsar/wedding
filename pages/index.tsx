@@ -220,7 +220,7 @@ const stories: Story[] = [
     duration: 5000,
     content: () => {
       return (
-        <div className="story story-with-header text-white bg-black bg-opacity-50">
+        <div className="story story-with-header text-white bg-black bg-opacity-10">
           <div className="text-center grid pt-32 place-content-evenly h-full py-12">
             <p className="italic text-2xl sm:text-3xl">
               Due to the current pandemic situation, we will be very glad to
