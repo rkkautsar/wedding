@@ -26,7 +26,7 @@ export const AddComment = ({ onSubmit }) => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="username"
             type="text"
-            placeholder="Jon Snow"
+            placeholder="Faridah &amp; Rakha"
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
@@ -42,7 +42,7 @@ export const AddComment = ({ onSubmit }) => {
             id="comment"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             rows={2}
-            placeholder="Tell me what you think 😊"
+            placeholder="Congrats! Semoga sakinah mawaddah warahmah 🎊"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
