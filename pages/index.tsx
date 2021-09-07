@@ -15,7 +15,7 @@ import ImgRoyalTulip from "assets/royal-tulip.jpg";
 import ImgMap from "assets/map.jpg";
 import GettingMarried from "assets/getting-married-2.svg";
 
-import Stories, { WithSeeMore } from "react-insta-stories";
+import Stories, { WithHeader, WithSeeMore } from "react-insta-stories";
 import { Story } from "react-insta-stories/dist/interfaces";
 import { formatDuration, intervalToDuration } from "date-fns";
 import { zonedTimeToUtc } from "date-fns-tz";
@@ -104,6 +104,7 @@ const defaultHeader = {
 
 const stories: Story[] = [
   {
+    header: defaultHeader,
     type: "backgroundCustomContent",
     url: ImgCover1,
     duration: 3000,
@@ -244,8 +245,9 @@ const stories: Story[] = [
     ),
   },
   {
+    header: defaultHeader,
     duration: 30000,
-    content: ({ story, action }) => {
+    content: ({ story, action, config }) => {
       const { comments, loading } = useComments(
         "https://wed-comments.herokuapp.com/v1/graphql",
         "wedding-comments",
@@ -269,28 +271,30 @@ const stories: Story[] = [
       }, [loading, comments]);
 
       return (
-        <WithSeeMore story={story} action={action}>
-          <div className="story bg-white grid place-content-evenly">
-            <Image src={Logo} height={120} width={120} layout="intrinsic" />
-            {loading ? (
-              <div className="text-2xl min-h-60 text-center">Loading...</div>
-            ) : (
-              <div className="text-xl min-h-60 text-center">
-                {comments.length === 0 ? (
-                  "No comments yet, be the first one to add!"
-                ) : (
-                  <div className="text-center">
-                    <TextTransition
-                      text={`“${comments[commentIdx].content}” —${comments[commentIdx].author}`}
-                      springConfig={presets.stiff}
-                      direction="down"
-                    />
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        </WithSeeMore>
+        <WithHeader story={story} globalHeader={config.header}>
+          <WithSeeMore story={story} action={action}>
+            <div className="story story-with-header bg-white grid place-content-evenly">
+              <Image src={Logo} height={120} width={120} layout="intrinsic" />
+              {loading ? (
+                <div className="text-2xl min-h-60 text-center">Loading...</div>
+              ) : (
+                <div className="text-xl min-h-60 text-center">
+                  {comments.length === 0 ? (
+                    "No comments yet, be the first one to add!"
+                  ) : (
+                    <div className="text-center">
+                      <TextTransition
+                        text={`“${comments[commentIdx].content}” —${comments[commentIdx].author}`}
+                        springConfig={presets.stiff}
+                        direction="down"
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </WithSeeMore>
+        </WithHeader>
       );
     },
     seeMore: CommentsModal,
