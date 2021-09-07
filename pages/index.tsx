@@ -159,7 +159,9 @@ const stories: Story[] = [
       return (
         <div className="story story-with-header text-white bg-blue-ink bg-opacity-50 grid content-start pr-32">
           <h2 className="text-xl italic">The Bride</h2>
-          <h3 className="text-4xl">Faridah Nur Suci Amirahmandani, S.Kom</h3>
+          <h3 className="text-4xl italic">
+            Faridah Nur Suci Amirahmandani, S.Kom
+          </h3>
           <p className="italic">
             putri dari <br />
             Bpk. Arief Hamdani dan Ibu Khukamah
@@ -182,7 +184,7 @@ const stories: Story[] = [
         <div className="story story-with-header text-white bg-blue-ink bg-opacity-50 grid content-between">
           <div className="max-w-sm">
             <h2 className="text-xl italic">The Groom</h2>
-            <h3 className="text-4xl">Rakha Kanz Kautsar, S.Kom</h3>
+            <h3 className="text-4xl italic">Rakha Kanz Kautsar, S.Kom</h3>
             <p className="italic">
               putra dari <br />
               Bpk. Brilliantoro dan Ibu Maulina Dian Purwanti
@@ -229,9 +231,6 @@ const stories: Story[] = [
             </p>
             <div className="grid gap-4">
               <Image src={SVGQRCode} height={120} width={120} />
-              <p className="italic text-xl sm:text-2xl underline">
-                https://faridah-rakha.wedding/live
-              </p>
             </div>
           </div>
         </div>
@@ -239,7 +238,11 @@ const stories: Story[] = [
     },
     seeMore: () => {},
     seeMoreCollapsed: ({ action }) => (
-      <SeeMoreLink link="/live" action={action} />
+      <SeeMoreLink
+        label="https://faridah-rakha.wedding/live"
+        link="/live"
+        action={action}
+      />
     ),
   },
   {

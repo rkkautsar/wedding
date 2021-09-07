@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-  @import url("https://fonts.googleapis.com/css2?family=Unna:ital,wght@0,400;0,700;1,400&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Courgette&family=Unna:ital,wght@0,400;0,700;1,400&display=swap");
 
   body {
     @apply min-h-screen bg-black;
-    font-family: Unna, serif;
+    font-family: Unna, cursive;
     user-select: none;
     /* mobile viewport bug fix */
     min-height: -webkit-fill-available;
@@ -115,7 +115,6 @@
     text-align: center;
     letter-spacing: 0.1em;
     margin-bottom: 2.2vh;
-    text-transform: capitalize;
     opacity: 1;
     font-size: 0.8em;
     transition: opacity 300ms ease-in-out;
@@ -144,4 +143,8 @@
 }
 
 @layer utilities {
+  .italic {
+    font-family: Courgette, cursive;
+    font-style: normal;
+  }
 }
