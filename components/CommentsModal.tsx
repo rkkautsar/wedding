@@ -47,9 +47,7 @@ export const CommentsModal = ({ close }) => {
           </div>
           <section className="w-full max-w-md p-4 grid place-items-center">
             <AddComment onSubmit={addComment} />
-            <h3 className="font-bold text-xm">
-              {count === 1 ? "1 comment" : `${count} comments`}
-            </h3>
+            <h3 className="font-bold text-xm">{`${count} pesan`}</h3>
             {loading ? (
               "Loading..."
             ) : (

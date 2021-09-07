@@ -20,13 +20,13 @@ export const AddComment = ({ onSubmit }) => {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="username"
           >
-            Name
+            Dari..
           </label>
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="username"
             type="text"
-            placeholder="Faridah &amp; Rakha"
+            placeholder="Budi &amp; Mawar"
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
@@ -35,7 +35,7 @@ export const AddComment = ({ onSubmit }) => {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="comment"
           >
-            Comment
+            Pesan
           </label>
           <textarea
             name="comment"
@@ -53,7 +53,7 @@ export const AddComment = ({ onSubmit }) => {
             type="submit"
             disabled={comment.length === 0 || username.length === 0}
           >
-            Add comment
+            Submit
           </button>
         </div>
       </form>
