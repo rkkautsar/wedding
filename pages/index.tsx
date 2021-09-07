@@ -110,7 +110,7 @@ const stories: Story[] = [
     content: () => {
       return (
         <div className="story story-with-header text-white grid py-32 content-start">
-          <Image src={Logo} height={140} width={140} />
+          <Image src={Logo} height={120} width={120} />
         </div>
       );
     },
@@ -136,7 +136,7 @@ const stories: Story[] = [
       const formattedDuration = formatDuration(duration);
       return (
         <div className="story bg-dusty-blue bg-opacity-80 grid py-32 content-between text-center">
-          <Image src={Logo} height={140} width={140} priority />
+          <Image src={Logo} height={120} width={120} priority />
           <Image src={GettingMarried} height={843} width={1026} priority />
 
           <div>
