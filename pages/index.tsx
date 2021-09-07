@@ -2,7 +2,6 @@ import useWindowDimensions from "hooks/useWindowDimensions";
 import React, { Component, createContext, useEffect, useState } from "react";
 import { isMobile } from "react-device-detect";
 import Logo from "assets/logo.svg";
-import LogoCircle from "assets/logo-circle.svg";
 import SVGQRCode from "assets/qr-code.svg";
 import Image from "next/image";
 import ImgCover1 from "assets/cover-1.jpg";
@@ -13,7 +12,7 @@ import ImgFaridah from "assets/faridah.jpg";
 import ImgRakha from "assets/rakha.jpg";
 import ImgRoyalTulip from "assets/royal-tulip.jpg";
 import ImgMap from "assets/map.jpg";
-import GettingMarried from "assets/getting-married.svg";
+import GettingMarried from "assets/getting-married-2.svg";
 
 import Stories, { WithSeeMore } from "react-insta-stories";
 import { Story } from "react-insta-stories/dist/interfaces";
@@ -43,8 +42,8 @@ function MapPin(props: { lat: number; lng: number }) {
           objectFit="cover"
           layout="responsive"
         />
-        <div className="p-4 text-lg">
-          <h3 className="text-xl">Royal Tulip Gunung Geulis</h3>
+        <div className="p-4 text-lg text-gray-700">
+          <h3 className="text-xl text-gray-800">Royal Tulip Gunung Geulis</h3>
           <p>07.30-10.00 WIB (Akad)</p>
           <p>12.00-14.00 WIB (Resepsi)</p>
         </div>
@@ -158,8 +157,8 @@ const stories: Story[] = [
     content: () => {
       return (
         <div className="story story-with-header text-white bg-blue-ink bg-opacity-50 grid content-start pr-32">
-          <h2 className="text-xl italic">The Bride</h2>
-          <h3 className="text-4xl italic">
+          <h2 className="text-xl text-gray-200">The Bride</h2>
+          <h3 className="text-4xl font-normal italic">
             Faridah Nur Suci Amirahmandani, S.Kom
           </h3>
           <p className="italic">
@@ -183,8 +182,10 @@ const stories: Story[] = [
       return (
         <div className="story story-with-header text-white bg-blue-ink bg-opacity-50 grid content-between">
           <div className="max-w-sm">
-            <h2 className="text-xl italic">The Groom</h2>
-            <h3 className="text-4xl italic">Rakha Kanz Kautsar, S.Kom</h3>
+            <h2 className="text-xl text-gray-200">The Groom</h2>
+            <h3 className="text-4xl font-normal italic">
+              Rakha Kanz Kautsar, S.Kom
+            </h3>
             <p className="italic">
               putra dari <br />
               Bpk. Brilliantoro dan Ibu Maulina Dian Purwanti
