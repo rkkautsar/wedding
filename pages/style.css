@@ -11,6 +11,7 @@
     user-select: none;
     /* mobile viewport bug fix */
     min-height: -webkit-fill-available;
+    letter-spacing: 0.05em;
   }
 
   html {

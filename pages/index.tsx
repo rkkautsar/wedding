@@ -1,5 +1,6 @@
 import useWindowDimensions from "hooks/useWindowDimensions";
-import React, { Component, createContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import TextTransition, { presets } from "react-text-transition";
 import { isMobile } from "react-device-detect";
 import Logo from "assets/logo.svg";
 import SVGQRCode from "assets/qr-code.svg";
@@ -20,11 +21,9 @@ import { formatDuration, intervalToDuration } from "date-fns";
 import { zonedTimeToUtc } from "date-fns-tz";
 import { SeeMoreLink, SeeMoreReplayComment } from "components/SeeMoreCollapsed";
 import BackgroundCustomContent from "renderers/BackgroundCustomContent";
-import GoogleMapReact from "google-map-react";
 import { StoryContext } from "contexts/StoryContext";
 import { CommentsModal } from "components/CommentsModal";
-import { useComments } from "use-comments";
-import Truncate from "react-truncate";
+import { Comment, useComments } from "use-comments";
 
 const INITIAL_ZOOM = 12;
 const ASPECT_RATIO = 16 / 9;
@@ -43,7 +42,9 @@ function MapPin(props: { lat: number; lng: number }) {
           layout="responsive"
         />
         <div className="p-4 text-lg text-gray-700">
-          <h3 className="text-xl text-gray-800">Royal Tulip Gunung Geulis</h3>
+          <h3 className="text-xl text-gray-800">
+            Royal Tulip Gunung Geulis, Bogor
+          </h3>
           <p>07.30-10.00 WIB (Akad)</p>
           <p>12.00-14.00 WIB (Resepsi)</p>
         </div>
@@ -158,9 +159,7 @@ const stories: Story[] = [
       return (
         <div className="story story-with-header text-white bg-blue-ink bg-opacity-50 grid content-start pr-32">
           <h2 className="text-xl text-gray-200">The Bride</h2>
-          <h3 className="text-4xl font-normal italic">
-            Faridah Nur Suci Amirahmandani, S.Kom
-          </h3>
+          <h3 className="text-4xl">Faridah Nur Suci Amirahmandani, S.Kom</h3>
           <p className="italic">
             putri dari <br />
             Bpk. Arief Hamdani dan Ibu Khukamah
@@ -183,9 +182,7 @@ const stories: Story[] = [
         <div className="story story-with-header text-white bg-blue-ink bg-opacity-50 grid content-between">
           <div className="max-w-sm">
             <h2 className="text-xl text-gray-200">The Groom</h2>
-            <h3 className="text-4xl font-normal italic">
-              Rakha Kanz Kautsar, S.Kom
-            </h3>
+            <h3 className="text-4xl">Rakha Kanz Kautsar, S.Kom</h3>
             <p className="italic">
               putra dari <br />
               Bpk. Brilliantoro dan Ibu Maulina Dian Purwanti
@@ -224,7 +221,7 @@ const stories: Story[] = [
     content: () => {
       return (
         <div className="story story-with-header text-white bg-black bg-opacity-50">
-          <div className="text-center grid place-content-evenly h-full py-12">
+          <div className="text-center grid pt-32 place-content-evenly h-full py-12">
             <p className="italic text-2xl sm:text-3xl">
               Due to the current pandemic situation, we will be very glad to
               have you witness our wedding vows through our youtube live
@@ -253,9 +250,24 @@ const stories: Story[] = [
         "https://wed-comments.herokuapp.com/v1/graphql",
         "wedding-comments",
         {
-          limit: 2,
+          limit: 10,
         }
       );
+      const [commentIdx, setCommentIdx] = useState<number>(0);
+
+      useEffect(() => {
+        if (loading) return;
+        if (comments.length === 0) {
+          return;
+        }
+
+        setCommentIdx(0);
+        const id = setInterval(() => {
+          setCommentIdx((prev) => (prev + 1) % comments.length);
+        }, 3000);
+        return () => clearInterval(id);
+      }, [loading, comments]);
+
       return (
         <WithSeeMore story={story} action={action}>
           <div className="story bg-white grid place-content-evenly">
@@ -264,18 +276,17 @@ const stories: Story[] = [
               <div className="text-2xl min-h-60 text-center">Loading...</div>
             ) : (
               <div className="text-xl min-h-60 text-center">
-                {comments.length === 0
-                  ? "No comments yet, be the first one to add!"
-                  : null}
-                {comments.map((comment) => (
-                  <p>
-                    “
-                    <Truncate lines={3} ellipsis="...”">
-                      {comment.content}”
-                    </Truncate>
-                    {" —"} {comment.author}
-                  </p>
-                ))}
+                {comments.length === 0 ? (
+                  "No comments yet, be the first one to add!"
+                ) : (
+                  <div className="text-center">
+                    <TextTransition
+                      text={`“${comments[commentIdx].content}” —${comments[commentIdx].author}`}
+                      springConfig={presets.stiff}
+                      direction="down"
+                    />
+                  </div>
+                )}
               </div>
             )}
           </div>

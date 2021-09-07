@@ -40,7 +40,7 @@ export const AddComment = ({ onSubmit }) => {
           <textarea
             name="comment"
             id="comment"
-            className="font-sans shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             rows={2}
             placeholder="Tell me what you think 😊"
             value={comment}
