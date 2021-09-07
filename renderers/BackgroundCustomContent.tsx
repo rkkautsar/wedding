@@ -26,6 +26,7 @@ export const renderer: Renderer = (props) => {
             layout="fill"
             objectFit="cover"
             onLoad={imageLoaded}
+            priority
           />
         </div>
         <div className="absolute inset-0">

@@ -42,7 +42,7 @@
     @apply absolute w-full bg-black opacity-30 pointer-events-none h-screen;
   }
   .content-container {
-    @apply w-80 max-w-sm pointer-events-none transform -translate-x-1/2	 -translate-y-1/2 relative;
+    @apply w-80 max-w-sm pointer-events-none;
     font-family: Unna, serif;
   }
 

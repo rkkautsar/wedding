@@ -12,6 +12,7 @@ import ImgAvatar from "assets/avatar.jpg";
 import ImgFaridah from "assets/faridah.jpg";
 import ImgRakha from "assets/rakha.jpg";
 import ImgRoyalTulip from "assets/royal-tulip.jpg";
+import ImgMap from "assets/map.jpg";
 import GettingMarried from "assets/getting-married.svg";
 
 import Stories, { WithSeeMore } from "react-insta-stories";
@@ -23,6 +24,8 @@ import BackgroundCustomContent from "renderers/BackgroundCustomContent";
 import GoogleMapReact from "google-map-react";
 import { StoryContext } from "contexts/StoryContext";
 import { CommentsModal } from "components/CommentsModal";
+import { useComments } from "use-comments";
+import Truncate from "react-truncate";
 
 const INITIAL_ZOOM = 12;
 const ASPECT_RATIO = 16 / 9;
@@ -30,7 +33,7 @@ const THE_DATE = zonedTimeToUtc("2021-09-18 07:30", "Asia/Jakarta");
 
 function MapPin(props: { lat: number; lng: number }) {
   return (
-    <div className="content-container">
+    <div className="content-container text-black">
       <div className="grid gap-2 bg-white w-full rounded-lg">
         <Image
           src={ImgRoyalTulip}
@@ -42,8 +45,8 @@ function MapPin(props: { lat: number; lng: number }) {
         />
         <div className="p-4 text-lg">
           <h3 className="text-xl">Royal Tulip Gunung Geulis</h3>
-          <p>07.30-10.00 (Akad)</p>
-          <p>12.00-14.00 (Resepsi)</p>
+          <p>07.30-10.00 WIB (Akad)</p>
+          <p>12.00-14.00 WIB (Resepsi)</p>
         </div>
       </div>
     </div>
@@ -133,8 +136,8 @@ const stories: Story[] = [
       const formattedDuration = formatDuration(duration);
       return (
         <div className="story bg-dusty-blue bg-opacity-80 grid py-32 content-between text-center">
-          <Image src={Logo} height={140} width={140} />
-          <Image src={GettingMarried} height={843} width={1026} />
+          <Image src={Logo} height={140} width={140} priority />
+          <Image src={GettingMarried} height={843} width={1026} priority />
 
           <div>
             <h3 className="text-4xl text-blue-ink">
@@ -194,23 +197,15 @@ const stories: Story[] = [
     ),
   },
   {
-    content: ({ story, action }) => {
+    header: defaultHeader,
+    type: "backgroundCustomContent",
+    url: ImgMap,
+    duration: 5000,
+    content: () => {
       return (
-        <WithSeeMore story={story} action={action}>
-          <GoogleMapReact
-            bootstrapURLKeys={{
-              key: "AIzaSyCz22ZNNzlqjmlZOMrUoC6INUSJDy0-aXE",
-            }}
-            defaultCenter={{
-              lat: -6.626632,
-              lng: 106.863031,
-            }}
-            zoom={INITIAL_ZOOM}
-            options={{ mapId: "819c06442ec43f18", disableDefaultUI: true }}
-          >
-            <MapPin lat={-6.626632} lng={106.863031} />
-          </GoogleMapReact>
-        </WithSeeMore>
+        <div className="story text-white bg-black bg-opacity-50 grid place-content-center">
+          <MapPin lat={-6.626632} lng={106.863031} />
+        </div>
       );
     },
     seeMore: () => {},
@@ -250,10 +245,35 @@ const stories: Story[] = [
   {
     duration: 30000,
     content: ({ story, action }) => {
+      const { comments, loading } = useComments(
+        "https://wed-comments.herokuapp.com/v1/graphql",
+        "wedding-comments",
+        {
+          limit: 3,
+        }
+      );
       return (
         <WithSeeMore story={story} action={action}>
-          <div className="story bg-white grid place-items-center">
-            <Image src={Logo} height={120} width={120} />
+          <div className="story bg-white grid place-content-evenly">
+            <Image src={Logo} height={120} width={120} layout="intrinsic" />
+            {loading ? (
+              <div className="text-2xl min-h-60 text-center">Loading...</div>
+            ) : (
+              <div className="text-xl min-h-60 text-center">
+                {comments.length === 0
+                  ? "No comments yet, be the first one to add!"
+                  : null}
+                {comments.map((comment) => (
+                  <p>
+                    “
+                    <Truncate lines={3} ellipsis="...”">
+                      {comment.content}”
+                    </Truncate>
+                    {" —"} {comment.author}
+                  </p>
+                ))}
+              </div>
+            )}
           </div>
         </WithSeeMore>
       );

@@ -5,12 +5,14 @@ export const AddComment = ({ onSubmit }) => {
   const [comment, setComment] = useState("");
 
   return (
-    <div className="w-full max-w-xs">
+    <div className="w-full">
       <form
         className="pb-8 mb-4 border-black border-opacity-20 border-b"
         onSubmit={(e) => {
           e.preventDefault();
           onSubmit({ content: comment, author: username });
+          setUsername("");
+          setComment("");
         }}
       >
         <div className="mb-4">
