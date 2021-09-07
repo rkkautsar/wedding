@@ -249,7 +249,7 @@ const stories: Story[] = [
         "https://wed-comments.herokuapp.com/v1/graphql",
         "wedding-comments",
         {
-          limit: 3,
+          limit: 2,
         }
       );
       return (
