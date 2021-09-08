@@ -253,7 +253,7 @@ const stories: Story[] = [
           <div className="text-center grid place-content-evenly sm:pt-16 h-full py-12">
             {isInvited ? (
               <div>
-                <p className="text-lg italic sm:text-2xl">
+                <p className="text-lg italic sm:text-2xl mb-4">
                   Kami sangat mengharapkan kehadiran anda di acara resepsi kami!
                 </p>
                 <p className="text-xs sm:text-lg">
