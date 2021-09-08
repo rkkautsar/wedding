@@ -7,7 +7,7 @@ import { Loader } from "components/Loader";
 export const renderer: Renderer = (props) => {
   const { story, action, config } = props;
   const [loaded, setLoaded] = React.useState(false);
-  const { width, height, loader, storyStyles } = config;
+  const { width, height, loader } = config;
 
   const imageLoaded = () => {
     setLoaded(true);
@@ -28,29 +28,26 @@ export const renderer: Renderer = (props) => {
             onLoad={imageLoaded}
             priority
           />
-        </div>
-        <div className="absolute inset-0">
-          {loaded ? (
-            <Content {...props} />
-          ) : (
-            <div
-              style={{
-                width: width,
-                height: height,
-                position: "absolute",
-                left: 0,
-                top: 0,
-                background: "rgba(0, 0, 0, 0.9)",
-                zIndex: 9,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                color: "#ccc",
-              }}
-            >
-              {loader || <Loader />}
-            </div>
-          )}
+          <div className="absolute inset-0">
+            {loaded ? (
+              <Content {...props} />
+            ) : (
+              <div
+                style={{
+                  width: width,
+                  height: height,
+                  background: "rgba(0, 0, 0, 0.9)",
+                  zIndex: 9999,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  color: "#ccc",
+                }}
+              >
+                {loader || <Loader />}
+              </div>
+            )}
+          </div>
         </div>
       </WithSeeMore>
     </WithHeader>
