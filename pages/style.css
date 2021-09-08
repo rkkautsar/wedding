@@ -148,4 +148,11 @@
     font-family: Courgette, cursive;
     font-style: normal;
   }
+  .unna {
+    font-family: Unna, serif;
+  }
+  .unna.italic {
+    font-family: Unna, serif;
+    font-style: italic;
+  }
 }

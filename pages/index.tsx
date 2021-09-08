@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import TextTransition, { presets } from "react-text-transition";
 import { useRouter } from "next/router";
-import { createMedia } from "@artsy/fresnel";
 import Logo from "assets/logo.svg";
 import SVGQRCode from "assets/qr-code.svg";
 import Image from "next/image";
 import ImgCover1 from "assets/cover-1.jpg";
 import ImgCover2 from "assets/cover-2.jpg";
 import ImgCover3 from "assets/cover-3.jpg";
+import ImgCover4 from "assets/cover-4.jpg";
 import ImgAvatar from "assets/avatar.jpg";
 import ImgFaridah from "assets/faridah.jpg";
 import ImgRakha from "assets/rakha.jpg";
@@ -24,7 +24,6 @@ import BackgroundCustomContent from "renderers/BackgroundCustomContent";
 import { StoryContext } from "contexts/StoryContext";
 import { CommentsModal } from "components/CommentsModal";
 import { useComments } from "hooks/useComments";
-import useWindowDimensions from "hooks/useWindowDimensions";
 
 const INITIAL_ZOOM = 12;
 const ASPECT_RATIO = 16 / 9;
@@ -53,16 +52,6 @@ function MapPin(props: { lat: number; lng: number }) {
     </div>
   );
 }
-
-const { MediaContextProvider, Media } = createMedia({
-  // breakpoints values can be either strings or integers
-  breakpoints: {
-    sm: 0,
-    md: 768,
-    lg: 1024,
-    xl: 1192,
-  },
-});
 
 const App = (props: { deviceType: "mobile" | "desktop" }) => {
   const router = useRouter();
@@ -137,7 +126,7 @@ const stories: Story[] = [
     header: defaultHeader,
     type: "backgroundCustomContent",
     url: ImgCover2,
-    duration: 3000,
+    duration: 5000,
     content: () => {
       const [now, setNow] = useState(new Date());
       useEffect(() => {
@@ -167,7 +156,38 @@ const stories: Story[] = [
       );
     },
   },
-
+  {
+    header: defaultHeader,
+    duration: 5000,
+    content: ({ story, config }) => {
+      return (
+        <WithHeader story={story} globalHeader={config.header}>
+          <div className="story story-with-header text-white bg-white flex p-0 flex-col">
+            <div className="flex-1 text-black grid place-content-center text-center p-6">
+              <div>
+                <p className="italic unna">
+                  And one of His signs is that He created for you spouses from
+                  among yourselves so that you may find comfort in them. And He
+                  has placed between you compassion and mercy. Surely in this
+                  are signs for people who reflect.
+                </p>
+                <p className="font-bold">Ar-Ruum (The Romans): 21</p>
+              </div>
+            </div>
+            <div className="flex-1 relative">
+              <Image
+                src={ImgCover4}
+                layout="fill"
+                objectFit="cover"
+                objectPosition="center bottom"
+                priority
+              />
+            </div>
+          </div>
+        </WithHeader>
+      );
+    },
+  },
   {
     header: defaultHeader,
     type: "backgroundCustomContent",
