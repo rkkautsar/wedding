@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TextTransition, { presets } from "react-text-transition";
 import { useRouter } from "next/router";
 import { createMedia } from "@artsy/fresnel";
@@ -237,14 +237,32 @@ const stories: Story[] = [
     url: ImgCover3,
     duration: 5000,
     content: () => {
+      const { isInvited } = useContext(StoryContext);
       return (
         <div className="story story-with-header text-white bg-black bg-opacity-10">
-          <div className="text-center grid pt-32 place-content-evenly h-full py-12">
-            <p className="italic text-2xl sm:text-3xl">
-              Due to the current pandemic situation, we will be very glad to
-              have you witness our wedding vows through our youtube live
-              streaming below.
-            </p>
+          <div className="text-center grid place-content-evenly sm:pt-16 h-full py-12">
+            {isInvited ? (
+              <div>
+                <p className="text-lg italic sm:text-2xl">
+                  Kami sangat mengharapkan kehadiran anda di acara resepsi kami!
+                </p>
+                <p className="text-xs sm:text-lg">
+                  Namun demi keamanan dan kenyamanan bersama, setiap tamu
+                  (kecuali umur 12 tahun ke bawah) diwajibkan untuk menunjukkan
+                  bukti vaksin kedua atau swab antigen 1x24 jam. Kami mohon
+                  pengertian dan kerjasamanya. Kami juga menyediakan fasilitas
+                  antigen di venue jika membutuhkan. Jika berhalangan, kami juga
+                  menyediakan siaran langsung akad kami di link berikut:
+                </p>
+              </div>
+            ) : null}
+            {!isInvited ? (
+              <p className="italic text-2xl sm:text-3xl">
+                Due to the current pandemic situation, we will be very glad to
+                have you witness our wedding vows through our youtube live
+                streaming below.
+              </p>
+            ) : null}
             <div className="grid gap-4">
               <Image src={SVGQRCode} height={120} width={120} />
             </div>

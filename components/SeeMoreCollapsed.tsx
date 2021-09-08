@@ -29,7 +29,7 @@ export const SeeMoreReplayComment = (props: {
   toggleMore: any;
   action: Function;
 }) => {
-  const { setCurrentIndex } = useContext(StoryContext);
+  const { setCurrentIndex, isInvited } = useContext(StoryContext);
   const onReplay = () => {
     setCurrentIndex(undefined);
     setTimeout(() => {
@@ -51,7 +51,7 @@ export const SeeMoreReplayComment = (props: {
         onClick={props.toggleMore}
       >
         <Image src={IconComment} width={32} height={32} />
-        <span>Comment</span>
+        <span>{isInvited ? "RSVP" : "Comment"}</span>
       </div>
     </div>
   );
