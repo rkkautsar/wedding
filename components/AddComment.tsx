@@ -8,7 +8,8 @@ function getWhatsappLink(
   to: number,
   name: string,
   rsvp: string,
-  vaccine: string
+  vaccine: string,
+  numGuest: string
 ) {
   const num = NUMBER[to];
   const message = `Halo ${NAME[to]} 👋
@@ -19,7 +20,7 @@ Saya mau RSVP untuk acara resepsi ${
 Nama: ${name}
 Kehadiran: ${rsvp}
 ${rsvp === "Ya!" ? `Vaksin: ${vaccine}` : ""}
-Jumlah tamu: 1 orang
+${rsvp === "Ya!" ? `Jumlah tamu: ${numGuest}` : ""}
 
 ${
   rsvp === "Ya!"
@@ -36,6 +37,7 @@ export const AddComment = ({ onSubmit }) => {
   const [username, setUsername] = useState("");
   const [rsvp, setRsvp] = useState("-");
   const [vaccine, setVaccine] = useState("-");
+  const [numGuest, setNumGuest] = useState("-");
   const [comment, setComment] = useState("");
   const { isInvited } = useContext(StoryContext);
   let isFilled = [username, comment].every((field) => field.length > 0);
@@ -94,27 +96,53 @@ export const AddComment = ({ onSubmit }) => {
           </div>
         ) : null}
         {isInvited && rsvp === "Ya!" ? (
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="vaccine"
-            >
-              Sudah vaksin?
-            </label>
-            <select
-              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="vaccine"
-              onChange={(e) => setVaccine(e.target.value)}
-              value={vaccine}
-            >
-              <option value="-" disabled>
-                (Pilih...)
-              </option>
-              <option value="Sudah 2 dosis!">Sudah 2 dosis!</option>
-              <option value="Baru 1 dosis">Baru 1 dosis</option>
-              <option value="Belum, akan antigen dari rumah">Belum</option>
-            </select>
-          </div>
+          <>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="numGuest"
+              >
+                Berapa yang datang?
+              </label>
+              <select
+                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="numGuest"
+                onChange={(e) => setNumGuest(e.target.value)}
+                value={numGuest}
+              >
+                <option value="-" disabled>
+                  (Pilih...)
+                </option>
+                <option value="1 orang">1 orang</option>
+                <option value="2 orang">2 orang</option>
+                <option value="3 orang">3 orang</option>
+                <option value="4 orang">4 orang</option>
+              </select>
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="vaccine"
+              >
+                Semua sudah vaksin?
+              </label>
+              <select
+                className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="vaccine"
+                onChange={(e) => setVaccine(e.target.value)}
+                value={vaccine}
+              >
+                <option value="-" disabled>
+                  (Pilih...)
+                </option>
+                <option value="Sudah 2 dosis!">Semua sudah 2 dosis!</option>
+                <option value="Baru 1 dosis">Ada yang baru 1 dosis</option>
+                <option value="Ada yang belum, nanti antigen dari rumah">
+                  Ada yang belum, nanti antigen dari rumah
+                </option>
+              </select>
+            </div>
+          </>
         ) : null}
 
         <div className="mb-4">
@@ -122,7 +150,7 @@ export const AddComment = ({ onSubmit }) => {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="comment"
           >
-            Pesan
+            Pesan untuk Faridah &amp; Rakha
           </label>
           <textarea
             name="comment"
@@ -151,7 +179,9 @@ export const AddComment = ({ onSubmit }) => {
                 className="bg-dusty-blue text-blue-ink hover:bg-blue-ink hover:text-white font-bold py-2 px-4 rounded border border-transparent focus:outline-none focus:shadow-outline disabled:bg-gray-500 disabled:text-gray-400"
                 type="submit"
                 onClick={() =>
-                  window.open(getWhatsappLink(0, username, rsvp, vaccine))
+                  window.open(
+                    getWhatsappLink(0, username, rsvp, vaccine, numGuest)
+                  )
                 }
                 disabled={!isFilled}
               >
@@ -161,7 +191,9 @@ export const AddComment = ({ onSubmit }) => {
                 className="bg-dusty-blue text-blue-ink hover:bg-blue-ink hover:text-white font-bold py-2 px-4 rounded border border-transparent focus:outline-none focus:shadow-outline disabled:bg-gray-500 disabled:text-gray-400"
                 type="submit"
                 onClick={() =>
-                  window.open(getWhatsappLink(1, username, rsvp, vaccine))
+                  window.open(
+                    getWhatsappLink(1, username, rsvp, vaccine, numGuest)
+                  )
                 }
                 disabled={!isFilled}
               >
