@@ -4,7 +4,12 @@ import React, { useContext, useState } from "react";
 const NUMBER = ["6285772712440", "6285157590255"];
 const NAME = ["Faridah & Rakha", "Rakha & Faridah"];
 
-function getWhatsappLink(to: number, name: string, rsvp: string) {
+function getWhatsappLink(
+  to: number,
+  name: string,
+  rsvp: string,
+  vaccine: string
+) {
   const num = NUMBER[to];
   const message = `Halo ${NAME[to]} 👋
 Saya mau RSVP untuk acara resepsi ${
@@ -13,7 +18,7 @@ Saya mau RSVP untuk acara resepsi ${
 
 Nama: ${name}
 Kehadiran: ${rsvp}
-Vaksin: Belum/1 dosis/2 dosis
+${rsvp === "Ya!" ? `Vaksin: ${vaccine}` : ""}
 Jumlah tamu: 1 orang
 
 ${
@@ -29,9 +34,14 @@ ${
 
 export const AddComment = ({ onSubmit }) => {
   const [username, setUsername] = useState("");
-  const [rsvp, setRsvp] = useState("Ya!");
+  const [rsvp, setRsvp] = useState("-");
+  const [vaccine, setVaccine] = useState("-");
   const [comment, setComment] = useState("");
   const { isInvited } = useContext(StoryContext);
+  let isFilled = [username, comment].every((field) => field.length > 0);
+  if (isInvited) {
+    isFilled = isFilled && rsvp !== "-" && vaccine !== "-";
+  }
 
   return (
     <div className="w-full">
@@ -42,6 +52,8 @@ export const AddComment = ({ onSubmit }) => {
           onSubmit({ content: comment, author: username });
           setUsername("");
           setComment("");
+          setRsvp("-");
+          setVaccine("-");
         }}
       >
         <div className="mb-4">
@@ -63,7 +75,7 @@ export const AddComment = ({ onSubmit }) => {
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="username"
+              htmlFor="rsvp"
             >
               Bisa datang?
             </label>
@@ -71,9 +83,36 @@ export const AddComment = ({ onSubmit }) => {
               className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="rsvp"
               onChange={(e) => setRsvp(e.target.value)}
+              value={rsvp}
             >
+              <option value="-" disabled>
+                (Pilih...)
+              </option>
               <option value="Ya!">Ya!</option>
               <option value="Maaf, belum bisa :(">Maaf, belum bisa :(</option>
+            </select>
+          </div>
+        ) : null}
+        {isInvited && rsvp === "Ya!" ? (
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="vaccine"
+            >
+              Sudah vaksin?
+            </label>
+            <select
+              className="shadow border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="vaccine"
+              onChange={(e) => setVaccine(e.target.value)}
+              value={vaccine}
+            >
+              <option value="-" disabled>
+                (Pilih...)
+              </option>
+              <option value="Sudah 2 dosis!">Sudah 2 dosis!</option>
+              <option value="Baru 1 dosis">Baru 1 dosis</option>
+              <option value="Belum, akan antigen dari rumah">Belum</option>
             </select>
           </div>
         ) : null}
@@ -100,7 +139,7 @@ export const AddComment = ({ onSubmit }) => {
             <button
               className="bg-dusty-blue text-blue-ink hover:bg-blue-ink hover:text-white font-bold py-2 px-4 rounded border border-transparent focus:outline-none focus:shadow-outline disabled:bg-gray-500 disabled:text-gray-400"
               type="submit"
-              disabled={comment.length === 0 || username.length === 0}
+              disabled={!isFilled}
             >
               Submit
             </button>
@@ -111,16 +150,20 @@ export const AddComment = ({ onSubmit }) => {
               <button
                 className="bg-dusty-blue text-blue-ink hover:bg-blue-ink hover:text-white font-bold py-2 px-4 rounded border border-transparent focus:outline-none focus:shadow-outline disabled:bg-gray-500 disabled:text-gray-400"
                 type="submit"
-                onClick={() => window.open(getWhatsappLink(0, username, rsvp))}
-                disabled={comment.length === 0 || username.length === 0}
+                onClick={() =>
+                  window.open(getWhatsappLink(0, username, rsvp, vaccine))
+                }
+                disabled={!isFilled}
               >
                 RSVP ke Faridah
               </button>
               <button
                 className="bg-dusty-blue text-blue-ink hover:bg-blue-ink hover:text-white font-bold py-2 px-4 rounded border border-transparent focus:outline-none focus:shadow-outline disabled:bg-gray-500 disabled:text-gray-400"
                 type="submit"
-                onClick={() => window.open(getWhatsappLink(1, username, rsvp))}
-                disabled={comment.length === 0 || username.length === 0}
+                onClick={() =>
+                  window.open(getWhatsappLink(1, username, rsvp, vaccine))
+                }
+                disabled={!isFilled}
               >
                 RSVP ke Rakha
               </button>

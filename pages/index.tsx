@@ -249,10 +249,10 @@ const stories: Story[] = [
                 <p className="text-xs sm:text-lg">
                   Namun demi keamanan dan kenyamanan bersama, setiap tamu
                   (kecuali umur 12 tahun ke bawah) diwajibkan untuk menunjukkan
-                  bukti vaksin kedua atau swab antigen 1x24 jam. Kami mohon
-                  pengertian dan kerjasamanya. Kami juga menyediakan fasilitas
-                  antigen di venue jika membutuhkan. Jika berhalangan, kami juga
-                  menyediakan siaran langsung akad kami di link berikut:
+                  bukti vaksin kedua atau swab antigen 1x24 jam sebelum
+                  kehadiran. Kami mohon pengertian dan kerjasamanya. Jika
+                  berhalangan, kami juga menyediakan siaran langsung akad kami
+                  di link berikut:
                 </p>
               </div>
             ) : null}
