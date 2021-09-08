@@ -135,8 +135,12 @@ export const AddComment = ({ onSubmit }) => {
                 <option value="-" disabled>
                   (Pilih...)
                 </option>
-                <option value="Sudah 2 dosis!">Semua sudah 2 dosis!</option>
-                <option value="Baru 1 dosis">Ada yang baru 1 dosis</option>
+                <option value="Semua sudah 2 dosis!">
+                  Semua sudah 2 dosis!
+                </option>
+                <option value="Ada yang baru 1 dosis, nanti antigen dari rumah">
+                  Ada yang baru 1 dosis, nanti antigen dari rumah
+                </option>
                 <option value="Ada yang belum, nanti antigen dari rumah">
                   Ada yang belum, nanti antigen dari rumah
                 </option>
