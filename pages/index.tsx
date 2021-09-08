@@ -24,6 +24,7 @@ import BackgroundCustomContent from "renderers/BackgroundCustomContent";
 import { StoryContext } from "contexts/StoryContext";
 import { CommentsModal } from "components/CommentsModal";
 import { useComments } from "hooks/useComments";
+import HalfImageBackground from "renderers/HalfImageBackground";
 
 const INITIAL_ZOOM = 12;
 const ASPECT_RATIO = 16 / 9;
@@ -78,7 +79,7 @@ const App = (props: { deviceType: "mobile" | "desktop" }) => {
           height={storyHeight}
           width={storyWidth}
           keyboardNavigation
-          renderers={[BackgroundCustomContent]}
+          renderers={[BackgroundCustomContent, HalfImageBackground]}
         />
       </StoryContext.Provider>
     </div>
@@ -158,33 +159,22 @@ const stories: Story[] = [
   },
   {
     header: defaultHeader,
+    url: ImgCover4,
+    type: "halfImageBackground",
     duration: 5000,
     content: ({ story, config }) => {
       return (
-        <WithHeader story={story} globalHeader={config.header}>
-          <div className="story story-with-header text-white bg-white flex p-0 flex-col">
-            <div className="flex-1 text-black grid place-content-center text-center p-6">
-              <div>
-                <p className="italic unna">
-                  And one of His signs is that He created for you spouses from
-                  among yourselves so that you may find comfort in them. And He
-                  has placed between you compassion and mercy. Surely in this
-                  are signs for people who reflect.
-                </p>
-                <p className="font-bold">Ar-Ruum (The Romans): 21</p>
-              </div>
-            </div>
-            <div className="flex-1 relative">
-              <Image
-                src={ImgCover4}
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center bottom"
-                priority
-              />
-            </div>
+        <div className="story story-with-header w-full h-full grid place-items-center p-4 bg-white text-black text-center ">
+          <div>
+            <p className="italic unna mb-4">
+              And one of His signs is that He created for you spouses from among
+              yourselves so that you may find comfort in them. And He has placed
+              between you compassion and mercy. Surely in this are signs for
+              people who reflect.
+            </p>
+            <p className="font-bold">Ar-Ruum (The Romans): 21</p>
           </div>
-        </WithHeader>
+        </div>
       );
     },
   },
