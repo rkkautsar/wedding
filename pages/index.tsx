@@ -1,7 +1,7 @@
-import useWindowDimensions from "hooks/useWindowDimensions";
 import React, { useEffect, useState } from "react";
 import TextTransition, { presets } from "react-text-transition";
-import { isMobile } from "react-device-detect";
+import { useRouter } from "next/router";
+import { createMedia } from "@artsy/fresnel";
 import Logo from "assets/logo.svg";
 import SVGQRCode from "assets/qr-code.svg";
 import Image from "next/image";
@@ -24,6 +24,7 @@ import BackgroundCustomContent from "renderers/BackgroundCustomContent";
 import { StoryContext } from "contexts/StoryContext";
 import { CommentsModal } from "components/CommentsModal";
 import { useComments } from "hooks/useComments";
+import useWindowDimensions from "hooks/useWindowDimensions";
 
 const INITIAL_ZOOM = 12;
 const ASPECT_RATIO = 16 / 9;
@@ -53,33 +54,34 @@ function MapPin(props: { lat: number; lng: number }) {
   );
 }
 
-const App = () => {
-  const { width, height } = useWindowDimensions();
+const { MediaContextProvider, Media } = createMedia({
+  // breakpoints values can be either strings or integers
+  breakpoints: {
+    sm: 0,
+    md: 768,
+    lg: 1024,
+    xl: 1192,
+  },
+});
 
-  let storyWidth, storyHeight;
+const App = (props: { deviceType: "mobile" | "desktop" }) => {
+  const router = useRouter();
 
-  if (width == null || height == null) {
-    return null;
-  }
+  let storyWidth = `calc(var(--vh) * 100 / ${ASPECT_RATIO})`;
+  let storyHeight = "calc(var(--vh) * 100)";
 
-  if (isMobile) {
+  if (props.deviceType === "mobile") {
     storyWidth = "100vw";
     storyHeight = "calc(var(--vh) * 100)";
-  } else {
-    storyWidth = height / ASPECT_RATIO;
-    storyHeight = height;
-
-    if (storyWidth > width) {
-      storyWidth = width;
-      storyHeight = width * ASPECT_RATIO;
-    }
   }
 
   const [currentIndex, setCurrentIndex] = useState(undefined);
 
   return (
     <div className="stories-container">
-      <StoryContext.Provider value={{ setCurrentIndex }}>
+      <StoryContext.Provider
+        value={{ setCurrentIndex, isInvited: router.query["i"] === "1" }}
+      >
         <Stories
           currentIndex={currentIndex}
           stories={stories}
@@ -93,6 +95,21 @@ const App = () => {
     </div>
   );
 };
+
+export async function getServerSideProps(context) {
+  const UA = context.req.headers["user-agent"];
+  const isMobile = Boolean(
+    UA.match(
+      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
+  );
+
+  return {
+    props: {
+      deviceType: isMobile ? "mobile" : "desktop",
+    },
+  };
+}
 
 export default App;
 

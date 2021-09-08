@@ -25,9 +25,7 @@ export const renderer: Renderer = (props) => {
   }, [loaded]);
 
   const imageLoaded = () => {
-    console.log(loaded);
     setLoaded(true);
-    console.log("loaded");
     action("play");
   };
 

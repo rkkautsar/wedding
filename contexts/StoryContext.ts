@@ -1,7 +1,11 @@
 import { createContext } from "react";
 
-export const StoryContext = createContext<{
+interface StoryContextT {
   setCurrentIndex: (_: number) => any;
-}>({
+  isInvited?: boolean;
+}
+
+export const StoryContext = createContext<StoryContextT>({
   setCurrentIndex: () => {},
+  isInvited: false,
 });

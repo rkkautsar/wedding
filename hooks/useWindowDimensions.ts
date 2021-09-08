@@ -25,8 +25,10 @@ export default function useWindowDimensions() {
       setWindowDimensions(getWindowDimensions());
     }
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
   }, []);
 
   return windowDimensions;
