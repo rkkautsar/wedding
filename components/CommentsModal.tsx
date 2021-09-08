@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useComments } from "use-comments";
+import { useComments } from "hooks/useComments";
 import { AddComment } from "./AddComment";
 
 export const formatStatus = (status) => {
@@ -23,7 +23,9 @@ const stopPropagation = (e: Event) => {
 
 export const CommentsModal = ({ close }) => {
   const { comments, addComment, count, loading } = useComments(
-    "https://wed-comments.herokuapp.com/v1/graphql",
+    process.env.NODE_ENV === "production"
+      ? "https://wed-comments-fr.graphcdn.app"
+      : "https://wed-comments.herokuapp.com/v1/graphql",
     "wedding-comments"
   );
 

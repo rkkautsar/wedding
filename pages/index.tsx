@@ -23,7 +23,7 @@ import { SeeMoreLink, SeeMoreReplayComment } from "components/SeeMoreCollapsed";
 import BackgroundCustomContent from "renderers/BackgroundCustomContent";
 import { StoryContext } from "contexts/StoryContext";
 import { CommentsModal } from "components/CommentsModal";
-import { Comment, useComments } from "use-comments";
+import { useComments } from "hooks/useComments";
 
 const INITIAL_ZOOM = 12;
 const ASPECT_RATIO = 16 / 9;
@@ -249,7 +249,9 @@ const stories: Story[] = [
     duration: 30000,
     content: ({ story, action, config }) => {
       const { comments, loading } = useComments(
-        "https://wed-comments.herokuapp.com/v1/graphql",
+        process.env.NODE_ENV === "production"
+          ? "https://wed-comments-fr.graphcdn.app"
+          : "https://wed-comments.herokuapp.com/v1/graphql",
         "wedding-comments",
         {
           limit: 10,
