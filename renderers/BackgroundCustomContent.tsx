@@ -9,8 +9,25 @@ export const renderer: Renderer = (props) => {
   const [loaded, setLoaded] = React.useState(false);
   const { width, height, loader } = config;
 
+  React.useEffect(() => {
+    setLoaded(false);
+  }, [story]);
+
+  const ref = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
+    if (
+      !loaded &&
+      (ref.current?.firstChild?.firstChild as HTMLImageElement | undefined)
+        ?.complete
+    ) {
+      setLoaded(true);
+    }
+  }, [loaded]);
+
   const imageLoaded = () => {
+    console.log(loaded);
     setLoaded(true);
+    console.log("loaded");
     action("play");
   };
 
@@ -19,10 +36,10 @@ export const renderer: Renderer = (props) => {
   return (
     <WithHeader story={story} globalHeader={config.header}>
       <WithSeeMore story={story} action={action}>
-        <div className="relative h-full w-full bg-black inset-0">
+        <div ref={ref} className="relative h-full w-full bg-black inset-0">
           <Image
             src={story.url}
-            className="absolute inset-0"
+            className="absolute inset-0 bg-black"
             layout="fill"
             objectFit="cover"
             onLoad={imageLoaded}
