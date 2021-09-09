@@ -46,7 +46,7 @@ export const AddComment = ({ onSubmit }) => {
   }
 
   if (rsvp === "Ya!") {
-    isFilled = vaccine !== "-" && numGuest !== "-";
+    isFilled = isFilled && vaccine !== "-" && numGuest !== "-";
   }
 
   return (
