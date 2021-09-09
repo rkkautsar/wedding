@@ -42,7 +42,11 @@ export const AddComment = ({ onSubmit }) => {
   const { isInvited } = useContext(StoryContext);
   let isFilled = [username, comment].every((field) => field.length > 0);
   if (isInvited) {
-    isFilled = isFilled && rsvp !== "-" && vaccine !== "-";
+    isFilled = isFilled && rsvp !== "-";
+  }
+
+  if (rsvp === "Ya!") {
+    isFilled = vaccine !== "-" && numGuest !== "-";
   }
 
   return (
