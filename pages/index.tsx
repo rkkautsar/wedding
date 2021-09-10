@@ -250,10 +250,11 @@ const stories: Story[] = [
       const { isInvited } = useContext(StoryContext);
       return (
         <div className="story story-with-header text-white bg-black bg-opacity-10">
-          <div className="text-center grid place-content-evenly sm:pt-16 h-full py-12">
+          <div className="text-center grid place-content-evenly sm:pt-8 h-full py-12">
+            <div />
             {isInvited ? (
               <div>
-                <p className="text-lg italic sm:text-2xl mb-4">
+                <p className="text-lg italic sm:text-2xl mb-3">
                   Kami sangat mengharapkan kehadiran anda di acara resepsi kami!
                 </p>
                 <p className="text-xs sm:text-lg">
