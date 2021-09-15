@@ -66,11 +66,15 @@ const App = (props: { deviceType: "mobile" | "desktop" }) => {
   }
 
   const [currentIndex, setCurrentIndex] = useState(undefined);
+  const isRSVPClosed = true;
 
   return (
     <div className="stories-container">
       <StoryContext.Provider
-        value={{ setCurrentIndex, isInvited: router.query["i"] === "1" }}
+        value={{
+          setCurrentIndex,
+          isInvited: !isRSVPClosed && router.query["i"] === "1",
+        }}
       >
         <Stories
           currentIndex={currentIndex}
