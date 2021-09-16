@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import TextTransition, { presets } from "react-text-transition";
-import { useRouter } from "next/router";
+import router, { Router, useRouter } from "next/router";
 import Logo from "assets/logo.svg";
 import SVGQRCode from "assets/qr-code.svg";
 import Image from "next/image";
@@ -17,7 +17,7 @@ import GettingMarried from "assets/getting-married-2.svg";
 
 import Stories, { WithHeader, WithSeeMore } from "react-insta-stories";
 import { Story } from "react-insta-stories/dist/interfaces";
-import { formatDuration, intervalToDuration } from "date-fns";
+import { formatDuration, intervalToDuration, sub } from "date-fns";
 import { zonedTimeToUtc } from "date-fns-tz";
 import { SeeMoreLink, SeeMoreReplayComment } from "components/SeeMoreCollapsed";
 import BackgroundCustomContent from "renderers/BackgroundCustomContent";
@@ -29,6 +29,7 @@ import HalfImageBackground from "renderers/HalfImageBackground";
 const INITIAL_ZOOM = 12;
 const ASPECT_RATIO = 16 / 9;
 const THE_DATE = zonedTimeToUtc("2021-09-18 07:30", "Asia/Jakarta");
+const END_DATE = zonedTimeToUtc("2021-09-18 10:00", "Asia/Jakarta");
 
 function MapPin(props: { lat: number; lng: number }) {
   return (
@@ -134,7 +135,13 @@ const stories: Story[] = [
     duration: 5000,
     content: () => {
       const [now, setNow] = useState(new Date());
+      const isStarting = sub(THE_DATE, { minutes: 15 }) < now;
+      const isEnded = END_DATE < now;
       useEffect(() => {
+        if (isStarting && !isEnded) {
+          window.open("/live", "_self");
+        }
+
         const id = setInterval(() => {
           setNow(new Date());
         }, 1000);
@@ -144,8 +151,8 @@ const stories: Story[] = [
         start: now,
         end: THE_DATE,
       });
-      const isStarted = THE_DATE < now;
       const formattedDuration = formatDuration(duration);
+
       return (
         <div className="story bg-dusty-blue bg-opacity-80 grid py-32 content-between text-center">
           <Image src={Logo} height={120} width={120} priority />
