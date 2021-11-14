@@ -1,6 +1,7 @@
 # faridah & rakha wedding site
 
 https://faridah-rakha.wedding
+
 https://faridah.rakha.dev
 
 ## Running
