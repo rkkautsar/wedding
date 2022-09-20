@@ -162,7 +162,14 @@ const stories: Story[] = [
             <h3 className="text-4xl text-blue-ink">
               <time dateTime="2021-09-18 07:30+07:00">18.09.2021</time>
             </h3>
-            <em className="text-blue-ink">{formattedDuration}</em>
+            {isEnded ?
+              (<>
+                <h4 className="text-blue-ink mt-4">Yay!🥳 We have been married for:</h4>
+                <em className="text-blue-ink">{formattedDuration}</em>
+              </>) : (
+                <em className="text-blue-ink">{formattedDuration}</em>    
+              )
+            }
           </div>
         </div>
       );
@@ -206,7 +213,7 @@ const stories: Story[] = [
         </div>
       );
     },
-    seeMore: () => {},
+    seeMore: () => { },
     seeMoreCollapsed: ({ action }) => (
       <SeeMoreLink link="https://instagram.com/faridansaa" action={action} />
     ),
@@ -230,7 +237,7 @@ const stories: Story[] = [
         </div>
       );
     },
-    seeMore: () => {},
+    seeMore: () => { },
     seeMoreCollapsed: ({ action }) => (
       <SeeMoreLink link="https://instagram.com/rakhakk" action={action} />
     ),
@@ -247,7 +254,7 @@ const stories: Story[] = [
         </div>
       );
     },
-    seeMore: () => {},
+    seeMore: () => { },
     seeMoreCollapsed: ({ action }) => (
       <SeeMoreLink link="https://g.page/royaltulipgg?share" action={action} />
     ),
@@ -292,7 +299,7 @@ const stories: Story[] = [
         </div>
       );
     },
-    seeMore: () => {},
+    seeMore: () => { },
     seeMoreCollapsed: ({ action }) => (
       <SeeMoreLink
         label="https://faridah-rakha.wedding/live"
